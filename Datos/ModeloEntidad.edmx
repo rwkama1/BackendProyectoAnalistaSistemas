@@ -1,0 +1,1189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProyectoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="IdAdministrador" />
+          </Key>
+          <Property Name="IdAdministrador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedulaAdministrador" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cadete">
+          <Key>
+            <PropertyRef Name="IdCadete" />
+          </Key>
+          <Property Name="IdCadete" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedulaCadete" Type="bigint" Nullable="false" />
+          <Property Name="BajaCad" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cajero">
+          <Key>
+            <PropertyRef Name="IdCajero" />
+          </Key>
+          <Property Name="IdCajero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedulaCajero" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CedulaCli" Type="int" Nullable="false" />
+          <Property Name="NomCli" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DirCli" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telCli" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PassCli" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Compra">
+          <Key>
+            <PropertyRef Name="IdC" />
+          </Key>
+          <Property Name="IdC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaC" Type="datetime" Nullable="false" />
+          <Property Name="MetodoPagoC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClienteC" Type="int" />
+          <Property Name="ImpuestosC" Type="money" Nullable="false" />
+          <Property Name="SubtotalC" Type="money" Nullable="false" />
+          <Property Name="TotalC" Type="money" Nullable="false" />
+          <Property Name="FormaEntregaC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EstadoC" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cuota">
+          <Key>
+            <PropertyRef Name="IDCu" />
+          </Key>
+          <Property Name="IDCu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImporteCu" Type="money" Nullable="false" />
+          <Property Name="NumeroTCU" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FacturaCompra">
+          <Key>
+            <PropertyRef Name="NumeroFC" />
+            <PropertyRef Name="ProvFC" />
+          </Key>
+          <Property Name="IdFC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroFC" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="ProvFC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaFC" Type="datetime" Nullable="false" />
+          <Property Name="ImpuestosFC" Type="money" />
+          <Property Name="SubtotalFC" Type="money" />
+          <Property Name="TotalFC" Type="money" />
+        </EntityType>
+        <EntityType Name="LineaCompra">
+          <Key>
+            <PropertyRef Name="IdLC" />
+            <PropertyRef Name="ProductoLC" />
+            <PropertyRef Name="IdC" />
+          </Key>
+          <Property Name="IdLC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductoLC" Type="int" Nullable="false" />
+          <Property Name="IdC" Type="int" Nullable="false" />
+          <Property Name="CantidadLC" Type="int" Nullable="false" />
+          <Property Name="ImporteLC" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LineaFacturaCompra">
+          <Key>
+            <PropertyRef Name="IdLFC" />
+            <PropertyRef Name="ProductoLFC" />
+            <PropertyRef Name="IdFacturaCompra" />
+          </Key>
+          <Property Name="IdLFC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductoLFC" Type="int" Nullable="false" />
+          <Property Name="IdFacturaCompra" Type="int" Nullable="false" />
+          <Property Name="CantidadLFC" Type="int" Nullable="false" />
+          <Property Name="ImporteLFC" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LineaVenta">
+          <Key>
+            <PropertyRef Name="IdLV" />
+            <PropertyRef Name="ProductoLV" />
+            <PropertyRef Name="IdV" />
+          </Key>
+          <Property Name="IdLV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductoLV" Type="int" Nullable="false" />
+          <Property Name="IdV" Type="int" Nullable="false" />
+          <Property Name="CantidadLV" Type="int" Nullable="false" />
+          <Property Name="ImporteLV" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mensaje">
+          <Key>
+            <PropertyRef Name="IdMensaje" />
+          </Key>
+          <Property Name="IdMensaje" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComentarioMens" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Clicom" Type="int" Nullable="false" />
+          <Property Name="Vendresp" Type="bigint" />
+          <Property Name="RespuestaMens" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Fechaenvio" Type="datetime" Nullable="false" />
+          <Property Name="Fecharespuesta" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OrdenEnvio">
+          <Key>
+            <PropertyRef Name="IdOE" />
+            <PropertyRef Name="VentaOE" />
+          </Key>
+          <Property Name="IdOE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VentaOE" Type="int" Nullable="false" />
+          <Property Name="ClienteOE" Type="int" Nullable="false" />
+          <Property Name="CadeteOE" Type="bigint" Nullable="false" />
+          <Property Name="UbicacionOE" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="LocalidadOE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaOE" Type="datetime" Nullable="false" />
+          <Property Name="EstadoOE" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrdenTaller">
+          <Key>
+            <PropertyRef Name="IdOT" />
+            <PropertyRef Name="ProductoOT" />
+            <PropertyRef Name="ClienteOT" />
+            <PropertyRef Name="TecnicoOT" />
+          </Key>
+          <Property Name="IdOT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductoOT" Type="int" Nullable="false" />
+          <Property Name="FechaOT" Type="datetime" Nullable="false" />
+          <Property Name="ClienteOT" Type="int" Nullable="false" />
+          <Property Name="DeclaracionCOT" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="EstadoOT" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PrecioOT" Type="money" Nullable="false" />
+          <Property Name="ComentarioOT" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TecnicoOT" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PagoTarjeta">
+          <Key>
+            <PropertyRef Name="IDPT" />
+            <PropertyRef Name="NumeroT" />
+            <PropertyRef Name="ClienteT" />
+          </Key>
+          <Property Name="IDPT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroT" Type="bigint" Nullable="false" />
+          <Property Name="ClienteT" Type="int" Nullable="false" />
+          <Property Name="CantidadCuT" Type="int" Nullable="false" />
+          <Property Name="TotalT" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomProd" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="DescProd" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="StockProd" Type="bigint" Nullable="false" />
+          <Property Name="UbicProd" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PrecioProd" Type="money" Nullable="false" />
+          <Property Name="CatProd" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="BajaProd" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductosOE">
+          <Key>
+            <PropertyRef Name="IdProdOE" />
+            <PropertyRef Name="POE" />
+            <PropertyRef Name="IdOrdenE" />
+          </Key>
+          <Property Name="IdProdOE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="POE" Type="int" Nullable="false" />
+          <Property Name="IdOrdenE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RutProv" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomProve" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DirProve" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="telProve" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BajaProv" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stocker">
+          <Key>
+            <PropertyRef Name="IdStocker" />
+          </Key>
+          <Property Name="IdStocker" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedulaStocker" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tecnico">
+          <Key>
+            <PropertyRef Name="IdTecnico" />
+          </Key>
+          <Property Name="IdTecnico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedulaTecnico" Type="bigint" Nullable="false" />
+          <Property Name="BajaTec" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Idusu" />
+          </Key>
+          <Property Name="Idusu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CedulaUsu" Type="bigint" Nullable="false" />
+          <Property Name="NombreUsu" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ClaveUsu" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Sueldo" Type="money" Nullable="false" />
+          <Property Name="FechaIngreso" Type="date" Nullable="false" />
+          <Property Name="BajaUsu" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendedor">
+          <Key>
+            <PropertyRef Name="IdVendedor" />
+          </Key>
+          <Property Name="IdVendedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedulaVendedor" Type="bigint" Nullable="false" />
+          <Property Name="BajaV" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="IdV" />
+          </Key>
+          <Property Name="IdV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaV" Type="datetime" Nullable="false" />
+          <Property Name="VencimientoV" Type="datetime" Nullable="false" />
+          <Property Name="MetodoPagoV" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClienteV" Type="int" />
+          <Property Name="TarjetaV" Type="bigint" />
+          <Property Name="ImpuestosV" Type="money" Nullable="false" />
+          <Property Name="SubtotalV" Type="money" Nullable="false" />
+          <Property Name="TotalV" Type="money" Nullable="false" />
+          <Property Name="FormaEntregaV" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EstadoV" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Administr__cedul__6166761E' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Administr__cedul__6166761E" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Cadete__cedulaCa__625A9A57' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Cadete__cedulaCa__625A9A57" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Cajero__cedulaCa__634EBE90' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Cajero__cedulaCa__634EBE90" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Compra__ClienteC__17036CC0' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Compra__ClienteC__17036CC0" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Compra__ClienteC__6442E2C9' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Compra__ClienteC__6442E2C9" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Cuota__NumeroTCU__17F790F9' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Cuota__NumeroTCU__17F790F9" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Cuota__NumeroTCU__65370702' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Cuota__NumeroTCU__65370702" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__FacturaCo__ProvF__662B2B3B' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__FacturaCo__ProvF__662B2B3B" />-->
+        <Association Name="FK__LineaComp__Produ__671F4F74">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="LineaCompra" Type="Self.LineaCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="LineaCompra">
+              <PropertyRef Name="ProductoLC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LineaCompra__IdC__681373AD">
+          <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
+          <End Role="LineaCompra" Type="Self.LineaCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compra">
+              <PropertyRef Name="IdC" />
+            </Principal>
+            <Dependent Role="LineaCompra">
+              <PropertyRef Name="IdC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__LineaFact__IdFac__690797E6' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__LineaFact__IdFac__690797E6" />-->
+        <Association Name="FK__LineaFact__Produ__69FBBC1F">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="LineaFacturaCompra" Type="Self.LineaFacturaCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="LineaFacturaCompra">
+              <PropertyRef Name="ProductoLFC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LineaVent__Produ__6AEFE058">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="LineaVenta" Type="Self.LineaVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="LineaVenta">
+              <PropertyRef Name="ProductoLV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LineaVenta__IdV__6BE40491">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+          <End Role="LineaVenta" Type="Self.LineaVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="IdV" />
+            </Principal>
+            <Dependent Role="LineaVenta">
+              <PropertyRef Name="IdV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Mensaje__Clicom__6CD828CA' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Mensaje__Clicom__6CD828CA" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Mensaje__Vendres__6DCC4D03' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Mensaje__Vendres__6DCC4D03" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__OrdenEnvi__Cadet__6EC0713C' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__OrdenEnvi__Cadet__6EC0713C" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__OrdenEnvi__Clien__6FB49575' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__OrdenEnvi__Clien__6FB49575" />-->
+        <Association Name="FK__OrdenEnvi__Venta__70A8B9AE">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+          <End Role="OrdenEnvio" Type="Self.OrdenEnvio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="IdV" />
+            </Principal>
+            <Dependent Role="OrdenEnvio">
+              <PropertyRef Name="VentaOE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__OrdenTall__Clien__719CDDE7' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__OrdenTall__Clien__719CDDE7" />-->
+        <Association Name="FK__OrdenTall__Produ__72910220">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="OrdenTaller" Type="Self.OrdenTaller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="OrdenTaller">
+              <PropertyRef Name="ProductoOT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__OrdenTall__Tecni__73852659' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__OrdenTall__Tecni__73852659" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__PagoTarje__Clien__2739D489' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__PagoTarje__Clien__2739D489" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__PagoTarje__Clien__74794A92' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__PagoTarje__Clien__74794A92" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Productos__IdOrd__756D6ECB' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Productos__IdOrd__756D6ECB" />-->
+        <Association Name="FK__ProductosOE__POE__76619304">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="ProductosOE" Type="Self.ProductosOE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="ProductosOE">
+              <PropertyRef Name="POE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Stocker__cedulaS__7755B73D' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Stocker__cedulaS__7755B73D" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Tecnico__cedulaT__7849DB76' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Tecnico__cedulaT__7849DB76" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Vendedor__cedula__793DFFAF' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Vendedor__cedula__793DFFAF" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Venta__ClienteV__2CF2ADDF' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Venta__ClienteV__2CF2ADDF" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Venta__ClienteV__7A3223E8' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Venta__ClienteV__7A3223E8" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Venta__TarjetaV__2DE6D218' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Venta__TarjetaV__2DE6D218" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Venta__TarjetaV__7B264821' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Venta__TarjetaV__7B264821" />-->
+        <EntityContainer Name="ProyectoModelStoreContainer">
+          <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cadete" EntityType="Self.Cadete" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cajero" EntityType="Self.Cajero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Compra" EntityType="Self.Compra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cuota" EntityType="Self.Cuota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacturaCompra" EntityType="Self.FacturaCompra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LineaCompra" EntityType="Self.LineaCompra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LineaFacturaCompra" EntityType="Self.LineaFacturaCompra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LineaVenta" EntityType="Self.LineaVenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mensaje" EntityType="Self.Mensaje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenEnvio" EntityType="Self.OrdenEnvio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenTaller" EntityType="Self.OrdenTaller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PagoTarjeta" EntityType="Self.PagoTarjeta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductosOE" EntityType="Self.ProductosOE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stocker" EntityType="Self.Stocker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tecnico" EntityType="Self.Tecnico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__LineaComp__Produ__671F4F74" Association="Self.FK__LineaComp__Produ__671F4F74">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="LineaCompra" EntitySet="LineaCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LineaCompra__IdC__681373AD" Association="Self.FK__LineaCompra__IdC__681373AD">
+            <End Role="Compra" EntitySet="Compra" />
+            <End Role="LineaCompra" EntitySet="LineaCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LineaFact__Produ__69FBBC1F" Association="Self.FK__LineaFact__Produ__69FBBC1F">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="LineaFacturaCompra" EntitySet="LineaFacturaCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LineaVent__Produ__6AEFE058" Association="Self.FK__LineaVent__Produ__6AEFE058">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="LineaVenta" EntitySet="LineaVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LineaVenta__IdV__6BE40491" Association="Self.FK__LineaVenta__IdV__6BE40491">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="LineaVenta" EntitySet="LineaVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdenEnvi__Venta__70A8B9AE" Association="Self.FK__OrdenEnvi__Venta__70A8B9AE">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="OrdenEnvio" EntitySet="OrdenEnvio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdenTall__Produ__72910220" Association="Self.FK__OrdenTall__Produ__72910220">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="OrdenTaller" EntitySet="OrdenTaller" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductosOE__POE__76619304" Association="Self.FK__ProductosOE__POE__76619304">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ProductosOE" EntitySet="ProductosOE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProyectoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ProyectoEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="LogueoAdministrador" ReturnType="Collection(ProyectoModel.LogueoAdministrador_Result)">
+            <Parameter Name="cedula" Mode="In" Type="Int64" />
+            <Parameter Name="contraseña" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Administrador" EntityType="ProyectoModel.Administrador" />
+          <EntitySet Name="Cadete" EntityType="ProyectoModel.Cadete" />
+          <EntitySet Name="Cajero" EntityType="ProyectoModel.Cajero" />
+          <EntitySet Name="Cliente" EntityType="ProyectoModel.Cliente" />
+          <EntitySet Name="Compra" EntityType="ProyectoModel.Compra" />
+          <EntitySet Name="Cuota" EntityType="ProyectoModel.Cuota" />
+          <EntitySet Name="FacturaCompra" EntityType="ProyectoModel.FacturaCompra" />
+          <EntitySet Name="LineaCompra" EntityType="ProyectoModel.LineaCompra" />
+          <EntitySet Name="LineaFacturaCompra" EntityType="ProyectoModel.LineaFacturaCompra" />
+          <EntitySet Name="LineaVenta" EntityType="ProyectoModel.LineaVenta" />
+          <EntitySet Name="Mensaje" EntityType="ProyectoModel.Mensaje" />
+          <EntitySet Name="OrdenEnvio" EntityType="ProyectoModel.OrdenEnvio" />
+          <EntitySet Name="OrdenTaller" EntityType="ProyectoModel.OrdenTaller" />
+          <EntitySet Name="PagoTarjeta" EntityType="ProyectoModel.PagoTarjeta" />
+          <EntitySet Name="Producto" EntityType="ProyectoModel.Producto" />
+          <EntitySet Name="ProductosOE" EntityType="ProyectoModel.ProductosOE" />
+          <EntitySet Name="Proveedor" EntityType="ProyectoModel.Proveedor" />
+          <EntitySet Name="Stocker" EntityType="ProyectoModel.Stocker" />
+          <EntitySet Name="Tecnico" EntityType="ProyectoModel.Tecnico" />
+          <EntitySet Name="Vendedor" EntityType="ProyectoModel.Vendedor" />
+          <EntitySet Name="Venta" EntityType="ProyectoModel.Venta" />
+          <AssociationSet Name="FK__LineaCompra__IdC__1AD3FDA4" Association="ProyectoModel.FK__LineaCompra__IdC__1AD3FDA4">
+            <End Role="Compra" EntitySet="Compra" />
+            <End Role="LineaCompra" EntitySet="LineaCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LineaComp__Produ__19DFD96B" Association="ProyectoModel.FK__LineaComp__Produ__19DFD96B">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="LineaCompra" EntitySet="LineaCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LineaFact__Produ__1CBC4616" Association="ProyectoModel.FK__LineaFact__Produ__1CBC4616">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="LineaFacturaCompra" EntitySet="LineaFacturaCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LineaVent__Produ__1DB06A4F" Association="ProyectoModel.FK__LineaVent__Produ__1DB06A4F">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="LineaVenta" EntitySet="LineaVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LineaVenta__IdV__1EA48E88" Association="ProyectoModel.FK__LineaVenta__IdV__1EA48E88">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="LineaVenta" EntitySet="LineaVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdenEnvi__Venta__236943A5" Association="ProyectoModel.FK__OrdenEnvi__Venta__236943A5">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="OrdenEnvio" EntitySet="OrdenEnvio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdenTall__Produ__25518C17" Association="ProyectoModel.FK__OrdenTall__Produ__25518C17">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="OrdenTaller" EntitySet="OrdenTaller" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductosOE__POE__29221CFB" Association="ProyectoModel.FK__ProductosOE__POE__29221CFB">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ProductosOE" EntitySet="ProductosOE" />
+          </AssociationSet>
+          <EntitySet Name="Usuario" EntityType="ProyectoModel.Usuario" />
+          </EntityContainer>
+        <ComplexType Name="LogueoAdministrador_Result">
+          <Property Type="Int32" Name="Idusu" Nullable="false" />
+          <Property Type="Int64" Name="CedulaUsu" Nullable="false" />
+          <Property Type="String" Name="NombreUsu" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ClaveUsu" Nullable="false" MaxLength="20" />
+          <Property Type="Decimal" Name="Sueldo" Nullable="false" Precision="19" />
+          <Property Type="DateTime" Name="FechaIngreso" Nullable="false" />
+          <Property Type="Int32" Name="IdAdministrador" Nullable="false" />
+          <Property Type="Int64" Name="cedulaAdministrador" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="IdAdministrador" />
+          </Key>
+          <Property Name="IdAdministrador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedulaAdministrador" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cadete">
+          <Key>
+            <PropertyRef Name="IdCadete" />
+          </Key>
+          <Property Name="IdCadete" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedulaCadete" Type="Int64" Nullable="false" />
+          <Property Name="BajaCad" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cajero">
+          <Key>
+            <PropertyRef Name="IdCajero" />
+          </Key>
+          <Property Name="IdCajero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedulaCajero" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CedulaCli" Type="Int32" Nullable="false" />
+          <Property Name="NomCli" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DirCli" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telCli" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PassCli" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Compra">
+          <Key>
+            <PropertyRef Name="IdC" />
+          </Key>
+          <Property Name="IdC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MetodoPagoC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClienteC" Type="Int32" />
+          <Property Name="ImpuestosC" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="SubtotalC" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="TotalC" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="FormaEntregaC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LineaCompra" Relationship="ProyectoModel.FK__LineaCompra__IdC__1AD3FDA4" FromRole="Compra" ToRole="LineaCompra" />
+        </EntityType>
+        <EntityType Name="Cuota">
+          <Key>
+            <PropertyRef Name="IDCu" />
+          </Key>
+          <Property Name="IDCu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImporteCu" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="NumeroTCU" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FacturaCompra">
+          <Key>
+            <PropertyRef Name="NumeroFC" />
+            <PropertyRef Name="ProvFC" />
+          </Key>
+          <Property Name="IdFC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroFC" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="ProvFC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaFC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ImpuestosFC" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SubtotalFC" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalFC" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="LineaCompra">
+          <Key>
+            <PropertyRef Name="IdLC" />
+            <PropertyRef Name="ProductoLC" />
+            <PropertyRef Name="IdC" />
+          </Key>
+          <Property Name="IdLC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductoLC" Type="Int32" Nullable="false" />
+          <Property Name="IdC" Type="Int32" Nullable="false" />
+          <Property Name="CantidadLC" Type="Int32" Nullable="false" />
+          <Property Name="ImporteLC" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Compra" Relationship="ProyectoModel.FK__LineaCompra__IdC__1AD3FDA4" FromRole="LineaCompra" ToRole="Compra" />
+          <NavigationProperty Name="Producto" Relationship="ProyectoModel.FK__LineaComp__Produ__19DFD96B" FromRole="LineaCompra" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="LineaFacturaCompra">
+          <Key>
+            <PropertyRef Name="IdLFC" />
+            <PropertyRef Name="ProductoLFC" />
+            <PropertyRef Name="IdFacturaCompra" />
+          </Key>
+          <Property Name="IdLFC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductoLFC" Type="Int32" Nullable="false" />
+          <Property Name="IdFacturaCompra" Type="Int32" Nullable="false" />
+          <Property Name="CantidadLFC" Type="Int32" Nullable="false" />
+          <Property Name="ImporteLFC" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Producto" Relationship="ProyectoModel.FK__LineaFact__Produ__1CBC4616" FromRole="LineaFacturaCompra" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="LineaVenta">
+          <Key>
+            <PropertyRef Name="IdLV" />
+            <PropertyRef Name="ProductoLV" />
+            <PropertyRef Name="IdV" />
+          </Key>
+          <Property Name="IdLV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductoLV" Type="Int32" Nullable="false" />
+          <Property Name="IdV" Type="Int32" Nullable="false" />
+          <Property Name="CantidadLV" Type="Int32" Nullable="false" />
+          <Property Name="ImporteLV" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Producto" Relationship="ProyectoModel.FK__LineaVent__Produ__1DB06A4F" FromRole="LineaVenta" ToRole="Producto" />
+          <NavigationProperty Name="Venta" Relationship="ProyectoModel.FK__LineaVenta__IdV__1EA48E88" FromRole="LineaVenta" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="Mensaje">
+          <Key>
+            <PropertyRef Name="IdMensaje" />
+          </Key>
+          <Property Name="IdMensaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComentarioMens" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Clicom" Type="Int32" Nullable="false" />
+          <Property Name="Vendresp" Type="Int64" />
+          <Property Name="RespuestaMens" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Fechaenvio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecharespuesta" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="OrdenEnvio">
+          <Key>
+            <PropertyRef Name="IdOE" />
+            <PropertyRef Name="VentaOE" />
+          </Key>
+          <Property Name="IdOE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VentaOE" Type="Int32" Nullable="false" />
+          <Property Name="ClienteOE" Type="Int32" Nullable="false" />
+          <Property Name="CadeteOE" Type="Int64" Nullable="false" />
+          <Property Name="UbicacionOE" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="LocalidadOE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FechaOE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EstadoOE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Venta" Relationship="ProyectoModel.FK__OrdenEnvi__Venta__236943A5" FromRole="OrdenEnvio" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="OrdenTaller">
+          <Key>
+            <PropertyRef Name="IdOT" />
+            <PropertyRef Name="ProductoOT" />
+            <PropertyRef Name="ClienteOT" />
+            <PropertyRef Name="TecnicoOT" />
+          </Key>
+          <Property Name="IdOT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductoOT" Type="Int32" Nullable="false" />
+          <Property Name="FechaOT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ClienteOT" Type="Int32" Nullable="false" />
+          <Property Name="DeclaracionCOT" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoOT" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PrecioOT" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ComentarioOT" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TecnicoOT" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Producto" Relationship="ProyectoModel.FK__OrdenTall__Produ__25518C17" FromRole="OrdenTaller" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="PagoTarjeta">
+          <Key>
+            <PropertyRef Name="IDPT" />
+            <PropertyRef Name="NumeroT" />
+            <PropertyRef Name="ClienteT" />
+          </Key>
+          <Property Name="IDPT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroT" Type="Int64" Nullable="false" />
+          <Property Name="ClienteT" Type="Int32" Nullable="false" />
+          <Property Name="CantidadCuT" Type="Int32" Nullable="false" />
+          <Property Name="TotalT" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomProd" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DescProd" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="StockProd" Type="Int64" Nullable="false" />
+          <Property Name="UbicProd" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PrecioProd" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="CatProd" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="BajaProd" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LineaCompra" Relationship="ProyectoModel.FK__LineaComp__Produ__19DFD96B" FromRole="Producto" ToRole="LineaCompra" />
+          <NavigationProperty Name="LineaFacturaCompra" Relationship="ProyectoModel.FK__LineaFact__Produ__1CBC4616" FromRole="Producto" ToRole="LineaFacturaCompra" />
+          <NavigationProperty Name="LineaVenta" Relationship="ProyectoModel.FK__LineaVent__Produ__1DB06A4F" FromRole="Producto" ToRole="LineaVenta" />
+          <NavigationProperty Name="OrdenTaller" Relationship="ProyectoModel.FK__OrdenTall__Produ__25518C17" FromRole="Producto" ToRole="OrdenTaller" />
+          <NavigationProperty Name="ProductosOE" Relationship="ProyectoModel.FK__ProductosOE__POE__29221CFB" FromRole="Producto" ToRole="ProductosOE" />
+        </EntityType>
+        <EntityType Name="ProductosOE">
+          <Key>
+            <PropertyRef Name="IdProdOE" />
+            <PropertyRef Name="POE" />
+            <PropertyRef Name="IdOrdenE" />
+          </Key>
+          <Property Name="IdProdOE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="POE" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Producto" Relationship="ProyectoModel.FK__ProductosOE__POE__29221CFB" FromRole="ProductosOE" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RutProv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomProve" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DirProve" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telProve" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BajaProv" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stocker">
+          <Key>
+            <PropertyRef Name="IdStocker" />
+          </Key>
+          <Property Name="IdStocker" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedulaStocker" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tecnico">
+          <Key>
+            <PropertyRef Name="IdTecnico" />
+          </Key>
+          <Property Name="IdTecnico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedulaTecnico" Type="Int64" Nullable="false" />
+          <Property Name="BajaTec" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendedor">
+          <Key>
+            <PropertyRef Name="IdVendedor" />
+          </Key>
+          <Property Name="IdVendedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedulaVendedor" Type="Int64" Nullable="false" />
+          <Property Name="BajaV" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="IdV" />
+          </Key>
+          <Property Name="IdV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaV" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VencimientoV" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MetodoPagoV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClienteV" Type="Int32" />
+          <Property Name="TarjetaV" Type="Int64" />
+          <Property Name="ImpuestosV" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="SubtotalV" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="TotalV" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="FormaEntregaV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LineaVenta" Relationship="ProyectoModel.FK__LineaVenta__IdV__1EA48E88" FromRole="Venta" ToRole="LineaVenta" />
+          <NavigationProperty Name="OrdenEnvio" Relationship="ProyectoModel.FK__OrdenEnvi__Venta__236943A5" FromRole="Venta" ToRole="OrdenEnvio" />
+        </EntityType>
+        <Association Name="FK__LineaCompra__IdC__1AD3FDA4">
+          <End Type="ProyectoModel.Compra" Role="Compra" Multiplicity="1" />
+          <End Type="ProyectoModel.LineaCompra" Role="LineaCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compra">
+              <PropertyRef Name="IdC" />
+            </Principal>
+            <Dependent Role="LineaCompra">
+              <PropertyRef Name="IdC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LineaComp__Produ__19DFD96B">
+          <End Type="ProyectoModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="ProyectoModel.LineaCompra" Role="LineaCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="LineaCompra">
+              <PropertyRef Name="ProductoLC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LineaFact__Produ__1CBC4616">
+          <End Type="ProyectoModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="ProyectoModel.LineaFacturaCompra" Role="LineaFacturaCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="LineaFacturaCompra">
+              <PropertyRef Name="ProductoLFC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LineaVent__Produ__1DB06A4F">
+          <End Type="ProyectoModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="ProyectoModel.LineaVenta" Role="LineaVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="LineaVenta">
+              <PropertyRef Name="ProductoLV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LineaVenta__IdV__1EA48E88">
+          <End Type="ProyectoModel.Venta" Role="Venta" Multiplicity="1" />
+          <End Type="ProyectoModel.LineaVenta" Role="LineaVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="IdV" />
+            </Principal>
+            <Dependent Role="LineaVenta">
+              <PropertyRef Name="IdV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdenEnvi__Venta__236943A5">
+          <End Type="ProyectoModel.Venta" Role="Venta" Multiplicity="1" />
+          <End Type="ProyectoModel.OrdenEnvio" Role="OrdenEnvio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="IdV" />
+            </Principal>
+            <Dependent Role="OrdenEnvio">
+              <PropertyRef Name="VentaOE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdenTall__Produ__25518C17">
+          <End Type="ProyectoModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="ProyectoModel.OrdenTaller" Role="OrdenTaller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="OrdenTaller">
+              <PropertyRef Name="ProductoOT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductosOE__POE__29221CFB">
+          <End Type="ProyectoModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="ProyectoModel.ProductosOE" Role="ProductosOE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="ProductosOE">
+              <PropertyRef Name="POE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Idusu" />
+          </Key>
+          <Property Name="Idusu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CedulaUsu" Type="Int64" Nullable="false" />
+          <Property Name="NombreUsu" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveUsu" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Sueldo" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BajaUsu" Type="Boolean" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProyectoModelStoreContainer" CdmEntityContainer="ProyectoEntities">
+          <EntitySetMapping Name="Administrador">
+            <EntityTypeMapping TypeName="ProyectoModel.Administrador">
+              <MappingFragment StoreEntitySet="Administrador">
+                <ScalarProperty Name="cedulaAdministrador" ColumnName="cedulaAdministrador" />
+                <ScalarProperty Name="IdAdministrador" ColumnName="IdAdministrador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cadete">
+            <EntityTypeMapping TypeName="ProyectoModel.Cadete">
+              <MappingFragment StoreEntitySet="Cadete">
+                <ScalarProperty Name="BajaCad" ColumnName="BajaCad" />
+                <ScalarProperty Name="cedulaCadete" ColumnName="cedulaCadete" />
+                <ScalarProperty Name="IdCadete" ColumnName="IdCadete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cajero">
+            <EntityTypeMapping TypeName="ProyectoModel.Cajero">
+              <MappingFragment StoreEntitySet="Cajero">
+                <ScalarProperty Name="cedulaCajero" ColumnName="cedulaCajero" />
+                <ScalarProperty Name="IdCajero" ColumnName="IdCajero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="ProyectoModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="PassCli" ColumnName="PassCli" />
+                <ScalarProperty Name="telCli" ColumnName="telCli" />
+                <ScalarProperty Name="DirCli" ColumnName="DirCli" />
+                <ScalarProperty Name="NomCli" ColumnName="NomCli" />
+                <ScalarProperty Name="CedulaCli" ColumnName="CedulaCli" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compra">
+            <EntityTypeMapping TypeName="ProyectoModel.Compra">
+              <MappingFragment StoreEntitySet="Compra">
+                <ScalarProperty Name="EstadoC" ColumnName="EstadoC" />
+                <ScalarProperty Name="FormaEntregaC" ColumnName="FormaEntregaC" />
+                <ScalarProperty Name="TotalC" ColumnName="TotalC" />
+                <ScalarProperty Name="SubtotalC" ColumnName="SubtotalC" />
+                <ScalarProperty Name="ImpuestosC" ColumnName="ImpuestosC" />
+                <ScalarProperty Name="ClienteC" ColumnName="ClienteC" />
+                <ScalarProperty Name="MetodoPagoC" ColumnName="MetodoPagoC" />
+                <ScalarProperty Name="FechaC" ColumnName="FechaC" />
+                <ScalarProperty Name="IdC" ColumnName="IdC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuota">
+            <EntityTypeMapping TypeName="ProyectoModel.Cuota">
+              <MappingFragment StoreEntitySet="Cuota">
+                <ScalarProperty Name="NumeroTCU" ColumnName="NumeroTCU" />
+                <ScalarProperty Name="ImporteCu" ColumnName="ImporteCu" />
+                <ScalarProperty Name="IDCu" ColumnName="IDCu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturaCompra">
+            <EntityTypeMapping TypeName="ProyectoModel.FacturaCompra">
+              <MappingFragment StoreEntitySet="FacturaCompra">
+                <ScalarProperty Name="TotalFC" ColumnName="TotalFC" />
+                <ScalarProperty Name="SubtotalFC" ColumnName="SubtotalFC" />
+                <ScalarProperty Name="ImpuestosFC" ColumnName="ImpuestosFC" />
+                <ScalarProperty Name="FechaFC" ColumnName="FechaFC" />
+                <ScalarProperty Name="ProvFC" ColumnName="ProvFC" />
+                <ScalarProperty Name="NumeroFC" ColumnName="NumeroFC" />
+                <ScalarProperty Name="IdFC" ColumnName="IdFC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LineaCompra">
+            <EntityTypeMapping TypeName="ProyectoModel.LineaCompra">
+              <MappingFragment StoreEntitySet="LineaCompra">
+                <ScalarProperty Name="ImporteLC" ColumnName="ImporteLC" />
+                <ScalarProperty Name="CantidadLC" ColumnName="CantidadLC" />
+                <ScalarProperty Name="IdC" ColumnName="IdC" />
+                <ScalarProperty Name="ProductoLC" ColumnName="ProductoLC" />
+                <ScalarProperty Name="IdLC" ColumnName="IdLC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LineaFacturaCompra">
+            <EntityTypeMapping TypeName="ProyectoModel.LineaFacturaCompra">
+              <MappingFragment StoreEntitySet="LineaFacturaCompra">
+                <ScalarProperty Name="ImporteLFC" ColumnName="ImporteLFC" />
+                <ScalarProperty Name="CantidadLFC" ColumnName="CantidadLFC" />
+                <ScalarProperty Name="IdFacturaCompra" ColumnName="IdFacturaCompra" />
+                <ScalarProperty Name="ProductoLFC" ColumnName="ProductoLFC" />
+                <ScalarProperty Name="IdLFC" ColumnName="IdLFC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LineaVenta">
+            <EntityTypeMapping TypeName="ProyectoModel.LineaVenta">
+              <MappingFragment StoreEntitySet="LineaVenta">
+                <ScalarProperty Name="ImporteLV" ColumnName="ImporteLV" />
+                <ScalarProperty Name="CantidadLV" ColumnName="CantidadLV" />
+                <ScalarProperty Name="IdV" ColumnName="IdV" />
+                <ScalarProperty Name="ProductoLV" ColumnName="ProductoLV" />
+                <ScalarProperty Name="IdLV" ColumnName="IdLV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mensaje">
+            <EntityTypeMapping TypeName="ProyectoModel.Mensaje">
+              <MappingFragment StoreEntitySet="Mensaje">
+                <ScalarProperty Name="Fecharespuesta" ColumnName="Fecharespuesta" />
+                <ScalarProperty Name="Fechaenvio" ColumnName="Fechaenvio" />
+                <ScalarProperty Name="RespuestaMens" ColumnName="RespuestaMens" />
+                <ScalarProperty Name="Vendresp" ColumnName="Vendresp" />
+                <ScalarProperty Name="Clicom" ColumnName="Clicom" />
+                <ScalarProperty Name="ComentarioMens" ColumnName="ComentarioMens" />
+                <ScalarProperty Name="IdMensaje" ColumnName="IdMensaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenEnvio">
+            <EntityTypeMapping TypeName="ProyectoModel.OrdenEnvio">
+              <MappingFragment StoreEntitySet="OrdenEnvio">
+                <ScalarProperty Name="EstadoOE" ColumnName="EstadoOE" />
+                <ScalarProperty Name="FechaOE" ColumnName="FechaOE" />
+                <ScalarProperty Name="LocalidadOE" ColumnName="LocalidadOE" />
+                <ScalarProperty Name="UbicacionOE" ColumnName="UbicacionOE" />
+                <ScalarProperty Name="CadeteOE" ColumnName="CadeteOE" />
+                <ScalarProperty Name="ClienteOE" ColumnName="ClienteOE" />
+                <ScalarProperty Name="VentaOE" ColumnName="VentaOE" />
+                <ScalarProperty Name="IdOE" ColumnName="IdOE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenTaller">
+            <EntityTypeMapping TypeName="ProyectoModel.OrdenTaller">
+              <MappingFragment StoreEntitySet="OrdenTaller">
+                <ScalarProperty Name="TecnicoOT" ColumnName="TecnicoOT" />
+                <ScalarProperty Name="ComentarioOT" ColumnName="ComentarioOT" />
+                <ScalarProperty Name="PrecioOT" ColumnName="PrecioOT" />
+                <ScalarProperty Name="EstadoOT" ColumnName="EstadoOT" />
+                <ScalarProperty Name="DeclaracionCOT" ColumnName="DeclaracionCOT" />
+                <ScalarProperty Name="ClienteOT" ColumnName="ClienteOT" />
+                <ScalarProperty Name="FechaOT" ColumnName="FechaOT" />
+                <ScalarProperty Name="ProductoOT" ColumnName="ProductoOT" />
+                <ScalarProperty Name="IdOT" ColumnName="IdOT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PagoTarjeta">
+            <EntityTypeMapping TypeName="ProyectoModel.PagoTarjeta">
+              <MappingFragment StoreEntitySet="PagoTarjeta">
+                <ScalarProperty Name="TotalT" ColumnName="TotalT" />
+                <ScalarProperty Name="CantidadCuT" ColumnName="CantidadCuT" />
+                <ScalarProperty Name="ClienteT" ColumnName="ClienteT" />
+                <ScalarProperty Name="NumeroT" ColumnName="NumeroT" />
+                <ScalarProperty Name="IDPT" ColumnName="IDPT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="ProyectoModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="BajaProd" ColumnName="BajaProd" />
+                <ScalarProperty Name="CatProd" ColumnName="CatProd" />
+                <ScalarProperty Name="PrecioProd" ColumnName="PrecioProd" />
+                <ScalarProperty Name="UbicProd" ColumnName="UbicProd" />
+                <ScalarProperty Name="StockProd" ColumnName="StockProd" />
+                <ScalarProperty Name="DescProd" ColumnName="DescProd" />
+                <ScalarProperty Name="NomProd" ColumnName="NomProd" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductosOE">
+            <EntityTypeMapping TypeName="ProyectoModel.ProductosOE">
+              <MappingFragment StoreEntitySet="ProductosOE">
+                <ScalarProperty Name="IdOrdenE" ColumnName="IdOrdenE" />
+                <ScalarProperty Name="POE" ColumnName="POE" />
+                <ScalarProperty Name="IdProdOE" ColumnName="IdProdOE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedor">
+            <EntityTypeMapping TypeName="ProyectoModel.Proveedor">
+              <MappingFragment StoreEntitySet="Proveedor">
+                <ScalarProperty Name="BajaProv" ColumnName="BajaProv" />
+                <ScalarProperty Name="telProve" ColumnName="telProve" />
+                <ScalarProperty Name="DirProve" ColumnName="DirProve" />
+                <ScalarProperty Name="NomProve" ColumnName="NomProve" />
+                <ScalarProperty Name="RutProv" ColumnName="RutProv" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocker">
+            <EntityTypeMapping TypeName="ProyectoModel.Stocker">
+              <MappingFragment StoreEntitySet="Stocker">
+                <ScalarProperty Name="cedulaStocker" ColumnName="cedulaStocker" />
+                <ScalarProperty Name="IdStocker" ColumnName="IdStocker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tecnico">
+            <EntityTypeMapping TypeName="ProyectoModel.Tecnico">
+              <MappingFragment StoreEntitySet="Tecnico">
+                <ScalarProperty Name="BajaTec" ColumnName="BajaTec" />
+                <ScalarProperty Name="cedulaTecnico" ColumnName="cedulaTecnico" />
+                <ScalarProperty Name="IdTecnico" ColumnName="IdTecnico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendedor">
+            <EntityTypeMapping TypeName="ProyectoModel.Vendedor">
+              <MappingFragment StoreEntitySet="Vendedor">
+                <ScalarProperty Name="BajaV" ColumnName="BajaV" />
+                <ScalarProperty Name="cedulaVendedor" ColumnName="cedulaVendedor" />
+                <ScalarProperty Name="IdVendedor" ColumnName="IdVendedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venta">
+            <EntityTypeMapping TypeName="ProyectoModel.Venta">
+              <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="EstadoV" ColumnName="EstadoV" />
+                <ScalarProperty Name="FormaEntregaV" ColumnName="FormaEntregaV" />
+                <ScalarProperty Name="TotalV" ColumnName="TotalV" />
+                <ScalarProperty Name="SubtotalV" ColumnName="SubtotalV" />
+                <ScalarProperty Name="ImpuestosV" ColumnName="ImpuestosV" />
+                <ScalarProperty Name="TarjetaV" ColumnName="TarjetaV" />
+                <ScalarProperty Name="ClienteV" ColumnName="ClienteV" />
+                <ScalarProperty Name="MetodoPagoV" ColumnName="MetodoPagoV" />
+                <ScalarProperty Name="VencimientoV" ColumnName="VencimientoV" />
+                <ScalarProperty Name="FechaV" ColumnName="FechaV" />
+                <ScalarProperty Name="IdV" ColumnName="IdV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ProyectoModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="BajaUsu" ColumnName="BajaUsu" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+                <ScalarProperty Name="ClaveUsu" ColumnName="ClaveUsu" />
+                <ScalarProperty Name="NombreUsu" ColumnName="NombreUsu" />
+                <ScalarProperty Name="CedulaUsu" ColumnName="CedulaUsu" />
+                <ScalarProperty Name="Idusu" ColumnName="Idusu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

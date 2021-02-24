@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a197b3f4bb9b45e0afe0b075f30201fd" Name="Diagram1" ZoomLevel="79">
+        <EntityTypeShape EntityType="ProyectoModel.Administrador" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="ProyectoModel.Cadete" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Cajero" Width="1.5" PointX="7.75" PointY="1.125" />
+        <EntityTypeShape EntityType="ProyectoModel.Cliente" Width="1.5" PointX="8.75" PointY="4.125" />
+        <EntityTypeShape EntityType="ProyectoModel.Compra" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ProyectoModel.Cuota" Width="1.5" PointX="2.75" PointY="9.125" />
+        <EntityTypeShape EntityType="ProyectoModel.FacturaCompra" Width="1.5" PointX="8.75" PointY="7.125" />
+        <EntityTypeShape EntityType="ProyectoModel.LineaCompra" Width="1.5" PointX="6" PointY="4" />
+        <EntityTypeShape EntityType="ProyectoModel.LineaFacturaCompra" Width="1.5" PointX="3" PointY="17.5" />
+        <EntityTypeShape EntityType="ProyectoModel.LineaVenta" Width="1.5" PointX="6" PointY="8" />
+        <EntityTypeShape EntityType="ProyectoModel.Mensaje" Width="1.5" PointX="10.75" PointY="1.125" />
+        <EntityTypeShape EntityType="ProyectoModel.OrdenEnvio" Width="1.5" PointX="6" PointY="20.875" />
+        <EntityTypeShape EntityType="ProyectoModel.OrdenTaller" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="ProyectoModel.PagoTarjeta" Width="1.5" PointX="10.75" PointY="5.125" />
+        <EntityTypeShape EntityType="ProyectoModel.Producto" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="ProyectoModel.ProductosOE" Width="1.5" PointX="3" PointY="11.875" />
+        <EntityTypeShape EntityType="ProyectoModel.Proveedor" Width="1.5" PointX="10.75" PointY="8.125" />
+        <EntityTypeShape EntityType="ProyectoModel.Stocker" Width="1.5" PointX="8.75" PointY="11.125" />
+        <EntityTypeShape EntityType="ProyectoModel.Tecnico" Width="1.5" PointX="10.75" PointY="11.125" />
+        <EntityTypeShape EntityType="ProyectoModel.Vendedor" Width="1.5" PointX="12.75" PointY="1.125" />
+        <EntityTypeShape EntityType="ProyectoModel.Venta" Width="1.5" PointX="3.75" PointY="20.5" />
+        <AssociationConnector Association="ProyectoModel.FK__LineaCompra__IdC__1AD3FDA4" />
+        <AssociationConnector Association="ProyectoModel.FK__LineaComp__Produ__19DFD96B" />
+        <AssociationConnector Association="ProyectoModel.FK__LineaFact__Produ__1CBC4616" />
+        <AssociationConnector Association="ProyectoModel.FK__LineaVent__Produ__1DB06A4F" />
+        <AssociationConnector Association="ProyectoModel.FK__LineaVenta__IdV__1EA48E88" />
+        <AssociationConnector Association="ProyectoModel.FK__OrdenEnvi__Venta__236943A5" />
+        <AssociationConnector Association="ProyectoModel.FK__OrdenTall__Produ__25518C17" />
+        <AssociationConnector Association="ProyectoModel.FK__ProductosOE__POE__29221CFB" />
+        <EntityTypeShape EntityType="ProyectoModel.Usuario" Width="1.5" PointX="5.375" PointY="11.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
